@@ -1,0 +1,19 @@
+carry db ?
+CLC
+MOV SI,1100H
+MOV CL,0005H
+MOV DI,1120H
+MOV BL,0012H
+RUN:
+MOV AL,[SI]
+ADD AL,AH
+MUL BL
+MOV [DI],Ah 
+MOV [DI+1],Al    
+mov ax,0h
+INC SI
+add DI,2h
+DEC CL
+JNZ RUN
+MOV carry,AH
+HLT

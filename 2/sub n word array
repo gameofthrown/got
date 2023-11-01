@@ -1,0 +1,19 @@
+ ; 8086 program to subtract 2 n word array
+
+mov si,3000H
+mov di,3010H 
+mov cl,05H
+MOV BX,3020h
+lab:
+mov al,[si]
+sub al,[di] 
+mov [BX],al 
+
+inc si
+inc di
+ 
+INC BX
+dec cl
+jnz lab
+hlt
+

@@ -1,0 +1,37 @@
+;program to perform subtraction of two 32-bit numbers
+
+N1 DW 2 DUP(?)    ; Define a buffer 'N1' to hold the first 32-bit number, 2 words (4 bytes) in size
+N2 DW 2 DUP(?)    ; Define a buffer 'N2' to hold the second 32-bit number, 2 words (4 bytes) in size
+S1 DW 2 DUP(?)    ; Define a buffer 'S1' to store the result, 2 words (4 bytes) in size
+
+
+CARRY DB 1 DUP(?) ; Define a single byte variable to hold the carry flag
+
+
+CLC               ; Clear the carry flag
+
+MOV N1, 1111H     ; Load the lower 16 bits of the first number into N1
+MOV N1+2, 1111H   ; Load the upper 16 bits of the first number into N1
+MOV N2, 1234H     ; Load the lower 16 bits of the second number into N2
+MOV N2+2, 5678H   ; Load the upper 16 bits of the second number into N2
+
+MOV AX, N1        ; Load the lower 16 bits of N1 into AX
+SUB AX, N2        ; Subtract the lower 16 bits of N2 from AX
+JNC LABEL1        ; Jump to LABEL1 if there's no borrow (CF=0) indicating AX >= 0
+
+NEG AX            ; If there's a borrow, negate AX (result is negative)
+
+LABEL1:
+MOV S1, AX        ; Store the result in the lower 16 bits of S1
+MOV AX, N1+2      ; Load the upper 16 bits of N1 into AX
+SBB AX, N2+2      ; Subtract the upper 16 bits of N2 from AX with borrow
+JNC LABEL2        ; Jump to LABEL2 if there's no borrow indicating AX >= 0
+
+NEG AX            ; If there's a borrow, negate AX (result is negative)
+MOV CARRY, 01H    ; Set the carry flag to indicate a negative result 
+
+LABEL2:
+MOV S1+2, AX      ; Store the result in the upper 16 bits of S1
+HLT               ; Halt the program
+
+

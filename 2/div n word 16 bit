@@ -1,0 +1,30 @@
+ORG 1000H  ; Assuming this is the start address for your code
+
+MOV SI, 1100H  ; Address of the array
+MOV CL, 0005H  ; Number of elements in the array
+MOV DI, 1120H  ; Address to store the results
+MOV BX, 010H  ; Divisor
+
+CLEAR_DX:
+  XOR DX, DX   ; Clear DX register before division
+
+RUN:
+  MOV AL, [SI]  ; Load an element from the array into AL
+  ADD AL, AH    ; Add any previous remainder (AH) to AL
+  DIV BX        ; Divide AX by BX; result in AX (quotient), remainder in AH
+
+  MOV [DI], AL  ; Store the quotient (DX) at the result address
+  MOV [DI+1], DL ; Store the remainder (AX) at the result address + 2
+  MOV carry, AH ; Store the remainder (AH) in the "carry" variable
+  MOV ah,0h
+
+  INC SI        ; Move to the next element in the array
+  ADD DI, 02H    ; Move to the next result address (3 bytes for the quotient, 1 byte for the remainder)
+  DEC CL        ; Decrement the loop counter
+  JNZ RUN       ; Repeat for all elements in the array
+
+HLT  ; Halt the program
+
+carry db 0   ; Define the "carry" variable
+
+; End of the program

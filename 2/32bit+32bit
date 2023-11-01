@@ -1,0 +1,21 @@
+ 
+N1 DW   2 DUP(?)
+N2 DW   2 DUP(?)
+N3 DW   3 DUP(?)
+
+CLC
+MOV N1,0ffffH 
+MOV N1+2,0ffffH
+MOV N2,0ffffH
+MOV N2+2,0ffffH
+MOV AX,N1
+ADD AX,N2 
+MOV N3,AX
+
+MOV BX,N1+2
+ADC BX,N2+2
+MOV N3+2,BX
+JNC LAB
+MOV N3+4,0001h
+LAB: 
+HLT 

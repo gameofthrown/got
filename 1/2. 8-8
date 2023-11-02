@@ -1,0 +1,11 @@
+         org 100H 
+MOV AX,09H 
+MOV BX,06H 
+CMP BX,AX   
+JNC LOOP1 
+SUB BX,AX 
+NEG BX 
+HLT        
+LOOP1:     
+SUB BX,AX 
+HLT 

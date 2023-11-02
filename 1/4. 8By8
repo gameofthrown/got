@@ -1,4 +1,4 @@
-        org 100H 
+org 100H 
 MOV AL,07H
  MOV BL,02H 
 DIV BL 

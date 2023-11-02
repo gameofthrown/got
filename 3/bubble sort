@@ -1,0 +1,82 @@
+ 
+
+MOV CL,04H
+MOV CH,05H
+
+MOV [SI],3000H
+ 
+ 
+LABEL1:
+ 
+
+MOV AL,[SI]
+MOV AH,[SI+1]
+
+CMP AL,AH
+JG  LAB
+INC SI
+DEC CL
+JZ LABEL6
+
+JMP LABEL1
+
+
+
+LAB: 
+
+MOV [SI+1],AL
+MOV [SI],AH 
+INC SI
+DEC CL  
+JZ LABEL6
+JMP LABEL1
+END:
+HLT
+                  
+ LABEL6:
+DEC CH
+JZ END
+MOV CL,04H
+MOV SI,3000H
+JMP LABEL1
+
+
+
+; arr in db
+data segment
+
+sun db 09H,08H,07H,06h,05H,04H,03H,02H,01H
+ 
+BRR DB 00H,00H,00H,00H,00H,00H,00H,00H,00H,00H
+            data ends
+code segment
+    assume cs:code,ds:data  
+    mov ax,data
+    mov ds,ax
+
+MOV DX,0009H
+LAB2:
+MOV CX,0009h
+LEA BX,SUN
+LEA SI,BRR
+LAB1:
+MOV AL,[BX]     
+CMP AL,[BX+1]
+JNG LAB
+MOV AH,[BX+1]
+MOV [SI+1],AL
+MOV [SI],AH
+LAB:
+INC BX 
+mov di, [bx]
+mov [si],di 
+INC SI
+LOOP LAB1:
+DEC DX
+JNZ LAB2         
+
+code ends
+
+
+; optimized
+

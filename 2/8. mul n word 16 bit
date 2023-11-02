@@ -12,6 +12,7 @@ MOV [DI],dx
 MOV [DI+1],Ah 
 MOV [DI+2],Al    
 mov ax,0h
+mov dx,0h
 INC SI
 add DI,3h
 DEC CL

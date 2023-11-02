@@ -1,0 +1,9 @@
+org 100h    
+a dw 08H 
+b dw 09H 
+c dw ? 
+MOV BX,a 
+MOV CX,b 
+ADD CX,BX 
+MOV c,CX 
+HLT 

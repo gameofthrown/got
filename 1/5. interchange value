@@ -1,0 +1,7 @@
+org 100H 
+MOV AL,08H 
+MOV BL,03H         
+MOV CL,BL 
+MOV BL,AL 
+MOV AL,CL 
+HLT 

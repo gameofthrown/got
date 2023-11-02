@@ -1,7 +1,9 @@
-org 100H 
-MOV AL,08H 
-MOV BL,03H         
-MOV CL,BL 
-MOV BL,AL 
-MOV AL,CL 
-HLT 
+org 100h
+a db 010h
+b db 020h
+mov al,b
+mov bl,a
+mov a,al
+mov b,bl
+ret
+end

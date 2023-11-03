@@ -19,3 +19,5 @@ DEC CL
 JNZ RUN
 MOV carry,AH
 HLT
+
+; ffff*ff = feff01

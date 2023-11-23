@@ -9,11 +9,9 @@ lab:
 mov al,[si]
 div bx 
 
-cmp dl,0h
-je lab1
+
 mov [bp],dl
 
-lab1:
 mov [di],al 
 
 mov ax,0h     

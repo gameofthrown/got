@@ -1,28 +1,25 @@
-ORG 1000H   ; Assuming this is the start address for your code
+ ; 8086 program to subtract 2 n word array
 
-CLC
-MOV SI,1100H
-MOV CL,0005H
-MOV DI,1120H
-MOV BL,0012H
+mov si,3000H
+mov di,3010H 
+mov cl,05H  
+mov bl,0fh
+mov bp,3030h
+lab:
+mov al,[si]
+div bl 
 
-RUN:
-    MOV AL,[SI]
-    ADD AL,AH
-    DIV BL          ; Divide AL by BL
-    MOV [DI],Al    ; Store quotient in [DI]
-    MOV [DI+1],Ah  ; Store remainder in [DI+1]
-    MOV AH,0        ; Clear AH
+cmp ah,0h
+je lab1
+mov [bp],ah
 
-    INC SI
-    ADD DI,2
-    DEC CL
-    JNZ RUN
+lab1:
+mov [di],al 
 
-MOV [carry],AH     ; Store carry in the "carry" variable
-
-HLT   ; Halt the program
-
-carry db ?   ; Define the "carry" variable
-
-; End of the program
+mov ax,0h
+inc si
+inc di
+inc bp
+dec cl
+jnz lab
+hlt

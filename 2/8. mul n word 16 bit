@@ -1,23 +1,17 @@
-carry db ?
-CLC
 MOV SI,1100H
 MOV CL,0005H
 MOV DI,1120H
-MOV Bx,0ffffh
+MOV Bx,0ffffH
 RUN:
-MOV AL,[SI]
-ADD AL,AH
-MUL Bx   
-MOV [DI],dx
-MOV [DI+1],Ah 
-MOV [DI+2],Al    
+MOV Al,[SI]
+MUL Bx  
+
+MOV [DI],dl
+MOV [DI+1],ah
+mov [di+2],al    
 mov ax,0h
-mov dx,0h
 INC SI
 add DI,3h
 DEC CL
 JNZ RUN
-MOV carry,AH
 HLT
-
-; ffff*ff = feff01

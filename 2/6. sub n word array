@@ -3,17 +3,22 @@
 mov si,3000H
 mov di,3010H 
 mov cl,05H
-MOV BX,3020h
+MOV BX,3020h  
+mov bp,3030h
 lab:
 mov al,[si]
 sub al,[di] 
+jnc lab1
+neg al
+mov [bp],01h 
+
+lab1:
 mov [BX],al 
 
 inc si
 inc di
- 
+inc bp
 INC BX
 dec cl
 jnz lab
 hlt
-
